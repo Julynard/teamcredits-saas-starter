@@ -3,7 +3,7 @@
 A starting point for SaaS apps: Google sign-in, PayPal subscriptions, team invites and a shared credit balance, with the billing edge cases handled.
 
 > **Status: in development.** This repo is the plan and the write-up; the interactive demo is being built next.
-> Star or watch the repo to see it land. The live demo link will appear here.
+> **Demo preview:** https://julynard.github.io/teamcredits-saas-starter/ (becomes the live demo when it ships).
 
 Part of [Julynard Tago-on's portfolio](https://julynardtago-on.netlify.app/#projects). Based on the team-collaboration SaaS at CoreProc where I was the top contributor (600+ commits).
 Client code is private, so this is a clean-room demo with fictional data. No client names or real data.
