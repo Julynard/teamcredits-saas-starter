@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TeamCredits SaaS Starter · Demo preview | Julynard Tago-on</title>
+  <meta name="description" content="A starting point for SaaS apps: Google sign-in, PayPal subscriptions, team invites and a shared credit balance, with the billing edge cases handled.">
+  <meta name="author" content="Julynard Tago-on">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #0F1513; --surface: #161E1B; --ink: #E6ECE8; --muted: #9AA8A1;
+      --line: #2A3631; --pine: #5CC2A6; --pine-soft: #1B2C27;
+      --sans: "Schibsted Grotesk", system-ui, sans-serif; --serif: "Source Serif 4", Georgia, serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --paper: #F5F7F4; --surface: #FFFFFF; --ink: #16201C; --muted: #56625C;
+              --line: #D6DDD8; --pine: #0F5A4A; --pine-soft: #E3EEEA; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.6 var(--serif); }
+    a { color: var(--pine); text-underline-offset: .2em; }
+    .bar { border-bottom: 1px solid var(--line); background: var(--surface); }
+    .bar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: .75rem;
+                  font: 500 .875rem/1.3 var(--sans); flex-wrap: wrap; }
+    .wrap { max-width: 52rem; margin: 0 auto; padding-inline: 16px; }
+    main { padding-block: 3rem 4rem; }
+    .badge { display: inline-block; padding: .25rem .625rem; border-radius: 999px; background: var(--pine-soft);
+              color: var(--pine); font: 700 .8125rem/1.3 var(--sans); letter-spacing: .02em; }
+    h1 { font: 800 clamp(2rem, 5vw, 3rem)/1.1 var(--sans); margin: 1rem 0 .75rem; letter-spacing: -.01em; }
+    .pitch { font-size: 1.25rem; color: var(--muted); margin: 0 0 2rem; }
+    section { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; margin-top: 1.25rem; }
+    h2 { font: 700 1.25rem/1.3 var(--sans); margin: 0 0 .75rem; }
+    ul { margin: 0; padding-left: 1.25rem; }
+    li + li { margin-top: .5rem; }
+    code { font-size: .9em; background: var(--pine-soft); padding: .05em .35em; border-radius: 4px; }
+    .note { color: var(--muted); font-size: .95rem; margin-top: 2rem; }
+    .actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; font-family: var(--sans); }
+    .btn { display: inline-block; padding: .625rem 1rem; border-radius: 10px; border: 1px solid var(--line);
+            text-decoration: none; font-weight: 700; color: var(--ink); }
+    .btn.primary { background: var(--pine); color: var(--paper); border-color: var(--pine); }
+  </style>
+</head>
+<body>
+  <div class="bar"><div class="wrap">
+    <a href="https://julynardtago-on.netlify.app/#projects">← Julynard Tago-on · Portfolio</a>
+    <span>Demo preview</span>
+  </div></div>
+  <main class="wrap">
+    <span class="badge">Interactive demo in progress</span>
+    <h1>TeamCredits SaaS Starter</h1>
+    <p class="pitch">A starting point for SaaS apps: Google sign-in, PayPal subscriptions, team invites and a shared credit balance, with the billing edge cases handled.</p>
+
+    <section>
+      <h2>What you'll be able to try</h2>
+      <ul>
+        <li>Pick a plan, go through a simulated PayPal checkout, land on an active subscription</li>
+        <li><strong>Webhook control panel</strong>: fire payment completed / payment failed / cancelled / duplicate events and watch the state machine (Active → Past due → Grace period → Suspended → Reactivated)</li>
+        <li>A time-travel slider shows abandoned checkouts being cleaned up after 24h</li>
+        <li>Duplicate webhooks are ignored (idempotency on the gateway event id)</li>
+        <li><strong>Team plan</strong>: invite, accept, decline, resend and remove members; a shared credit balance drains as members use the app</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How the production system works</h2>
+      <p>The real system runs on Laravel. The demo will simulate these behaviours in your browser, with an "In production" note on each key action.</p>
+      <ul>
+        <li>Laravel 12 + Inertia v2 + Vue 3/TypeScript, Fortify and Socialite (Google) for auth</li>
+        <li>Subscriptions modelled as subscriptions + periods with lifecycle timestamps; plans mapped to PayPal product/plan IDs</li>
+        <li>Billing logic in single-purpose Actions; scheduled commands apply grace periods and mark abandoned subscriptions</li>
+        <li>Payment logs keyed by gateway event id with <code>updateOrCreate</code>, so a webhook delivered twice changes nothing</li>
+        <li>A credit ledger (wallet) instead of a mutable balance column, plus admin KPI metrics in Laravel Nova</li>
+      </ul>
+    </section>
+
+    <div class="actions">
+      <a class="btn primary" href="https://julynardtago-on.netlify.app/#projects">Back to portfolio</a>
+      <a class="btn" href="https://julynardtago-on.netlify.app/#contact">Contact me</a>
+    </div>
+
+    <p class="note">Based on the team-collaboration SaaS at CoreProc where I was the top contributor (600+ commits). Client code is private, so this is a clean-room demo with fictional data.
+    Build progress: <a href="https://github.com/Julynard/teamcredits-saas-starter">github.com/Julynard/teamcredits-saas-starter</a>.</p>
+  </main>
+</body>
+</html>
